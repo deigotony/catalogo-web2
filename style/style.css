@@ -1,18 +1,25 @@
+:root{
+    --roxo: #6d00a1;
+    --roxo-escuro: #48006a;
+    --branco: #fff;
+    --preto: #000;
+}
+
 body{
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: rgb(222, 222, 222)f5;
+    background-color: var(--branco);
 }
 
 nav{
-    background-color: #8B0000;
+    background-color: var(--roxo);
     padding: 15px;
     display: flex;
     justify-content: space-around;
 }
 
 nav a{
-    color: white;
+    color: var(--branco);
     text-decoration: none;
     font-weight: bold;
 }
@@ -22,13 +29,15 @@ nav a:hover{
 }
 
 .container{
+    text-align: center;
+    font-size: 25px;
     padding: 30px;
     max-width: 800px;
     margin: auto;
 }
 
 h2{
-    color: #8B0000;
+    color: var(--roxo);
 }
 
 form{
@@ -39,29 +48,35 @@ form{
 input{
     padding: 10px;
     margin-bottom: 15px;
-    border: solid 1px #ccc;
+    border: solid 1px var(--roxo);
     border-radius: 5px;
 }
 
 button{
     padding: 10px;
     border: none;
-    background-color: #8B0000;
-    color: white;
+    background-color: var(--roxo);
+    color: var(--branco);
     font-weight: bold;
     cursor: pointer;
     border-radius: 5px;
 }
+#catalogo-relikta{
+    width: 200px;
+    height: 70px;
+    font-size: 20px;
+    border-radius: 20px;
+}
 
 button:hover{
-    background-color: #df3333;
+    background-color: var(--roxo-escuro);
 }
 
 .item{
-    background-color: white;
+    background-color: var(--branco);
     padding: 15px;  
     margin-bottom: 10px;
-    border-left: solid 5px #8B0000;
+    border-left: solid 5px var(--roxo);
     border-radius: 5px;
 }
 
@@ -72,11 +87,11 @@ button:hover{
 }
 
 .card {
-  background: white;
+  background: var(--branco);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  border-top: 5px solid #8B0000;
+  border-top: 5px solid var(--roxo);
 }
 
 .card img {
@@ -91,7 +106,7 @@ button:hover{
 
 .card h3 {
   margin: 5px 0;
-  color: #8B0000;
+  color: var(--roxo);
 }
 
 .card p {
