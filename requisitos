@@ -1,0 +1,17 @@
+Requisitos funcionais:
+1. O sistema deve ter um banco de dados para armazenar informações sobre logins (nome de usuário, e-mail, senha) e itens (nome, data, imagem, descrição, tipo de item).
+2. O sistema deverá possuir uma página de login de usuários. (Depende do requisito 1.)
+3. Deverá haver uma seção para cadastrar itens dos usuários. (Depende dos requisitos 1 e 2.)
+4. O website deve ter uma página catálogo que exponha os itens já cadastrados. (Depende dos requisitos 1, 2 e 3.)
+5. O sistema deverá permitir a alteração e remoção de informações dos itens já cadastrados. (Depende de todos os requisitos anteriores.)
+
+Requisitos não funcionais:
+1. O sistema de login deve ser seguro, impedindo o acesso indevido a contas de usuários. Pode ocorrer por meio de sugestões de senhas fortes e de uma observação rigorosa do acesso
+a informações sensíveis do sistema.
+2. O banco de dados deve ser construído de tal forma que não haja lacunas nas tabelas. Deve ser exigido que o usuário preencha todas as informações de login e cadastro.
+3. Ao alterar ou remover um item, é necessário garantir que as mudanças ocorridas também sejam sincronizadas no banco de dados.
+
+Tecnologias que serão utilizadas:
+*JavaScript;
+*Node.js;
+*MySQL;
