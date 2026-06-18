@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reliktas - Cadastro de Itens</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav>
+        <a href="/main.html">Relikta</a>
+        <a href="/login.html">Login</a>
+        <a href="/cadastro.html">Cadastrar itens</a>
+    </nav>
+
+    <div class="container">
+        <h2>Cadastrar itens à sua coleção</h2>
+
+        <form onsubmit="cadastrarItem(event)">
+            <input type="text" id="nome" placeholder="nome" required>
+            <input type="date" id="data" required>
+            <input type="file" id="imageUpload" accept="image/*" required>
+            <input type="text" id="descricao" placeholder="descrição" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+    <script src="/script-cadastro.js"></script>
+</body>
+</html>
