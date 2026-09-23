@@ -1,7 +1,7 @@
 const express=require('express');
 const session=require('express-session');
-const itens=require('./dados/itens.json');
-const usuarios=require('./dados/usuarios.json');
+const itens=require('../dados/itens.json');
+const usuarios=require('../dados/usuarios.json');
 
 const fs=require('fs');
 const multer=require('multer');
