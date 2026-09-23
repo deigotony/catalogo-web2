@@ -1,10 +1,10 @@
 {
   "name": "catalogo-web2-main",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,17 @@
   "dependencies": {
     "express": "^5.2.1",
     "express-session": "^1.19.0",
-    "multer": "^2.2.0"
-  }
+    "multer": "^2.2.0",
+    "sequelize": "^6.37.8",
+    "sqlite3": "^6.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deigotony/catalogo-web2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/deigotony/catalogo-web2/issues"
+  },
+  "homepage": "https://github.com/deigotony/catalogo-web2#readme",
+  "description": ""
 }
