@@ -1,0 +1,17 @@
+(esse arquivo vai ser deletado em breve. é só pra ter uma noção do caminho que as interações com o servidor vão seguir)
+
+caminho normal de uma interação que um usuário faz:
+usuário interage via HTML -> JS manda requisição HTTP -> routes -> controller -> service -> repository -> model -> SQLite -> (operações no banco de dados)
+
+app.js: configura middleware e rotas do express (exemplo: app.use(/usuarios, usuariosRoutes))
+server.js: importa app.js; roda o servidor em uma porta (app.listen(3000, ()=>{...}))
+
+testes:
+testar cada camada descrita anteriormente, começando do mais baixo até o mais em cima
+configurar o package.json para rodar a suite de testes
+
+mudanças:
+tirar as rotas de server.js e jogar para as camadas de routes e services
+substituir dados JSON por banco de dados (SQLite3 + Sequelize) e fazer as devidas adaptações no resto do código
+
+*: (deletei o diretório js/ contendo arquivo script.js)
