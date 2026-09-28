@@ -7,6 +7,7 @@ app.js: configura middleware e rotas do express (exemplo: app.use(/usuarios, usu
 server.js: importa app.js; roda o servidor em uma porta (app.listen(3000, ()=>{...}))
 
 testes:
+testes com transações (para dar rollback)
 testar cada camada descrita anteriormente, começando do mais baixo até o mais em cima
 configurar o package.json para rodar a suite de testes
 
