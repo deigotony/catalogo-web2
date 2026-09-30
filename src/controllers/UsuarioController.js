@@ -1,5 +1,5 @@
 const usuarioService = require('../services/UsuarioService');
-const { sessoes } = require('../middlewares/authMiddleware');
+const { sessoes } = require('../middleware/authMiddleware');
 class UsuarioController {
     async cadastrar(req, res){
         try{
