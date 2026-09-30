@@ -1,22 +1,22 @@
-const {Item, Usuario}=require("../models/");
+const {Item, Usuario, Categoria}=require("../models/");
 class ItemRepository{
-    listarTodos(condicoes={}, t=undefined){
-        return Item.findAll({include: Usuario, where: condicoes, transaction: t});
+    listarTodos(condicoes={}){
+        return Item.findAll({include: [Usuario, Categoria], where: condicoes});
     }
     criar(dados){
         return Item.create(dados);
     }
-    buscarPorId(id, t=undefined){
-        return Item.findByPk(id, {transaction: t});
+    buscarPorId(id){
+        return Item.findByPk(id, {include: [Usuario, Categoria]});
     }
     buscarImagem(url){
         return 
     }
-    atualizar(id, dados, t=undefined){
-        return Item.update(dados, {where: {itemId: id}, transaction: t});
+    atualizar(id, dados){
+        return Item.update(dados, {where: {itemId: id}});
     }
-    excluir(id, t=undefined){
-        return Item.destroy({where: {itemId: id}, transaction: t});
+    excluir(id){
+        return Item.destroy({where: {itemId: id}});
     }
 }
 module.exports=new ItemRepository();

@@ -6,7 +6,7 @@ const categoriaRoutes=require("./routes/categoriaRoutes");
 const app=express();
 
 app.use(express.json());
-
+    app.use(express.static("public")); // requisições de arquivos estáticos (como HTML) são feitas em public/
 /*app.use(session({
     secret: 'chave-weberson',
     resave: false, // não salvar se não houver mudanças

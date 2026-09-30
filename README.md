@@ -160,8 +160,7 @@ significativa de desempenho.
 ## 9. Regras de negócio
 
 -   **RN01:** Apenas usuários cadastrados poderão anunciar itens.
--   **RN02:** Todo anúncio deverá possuir, no mínimo, foto, nome,
-    categoria e descrição do item.
+-   **RN02:** Todo anúncio deverá possuir, no mínimo, foto, nome e descrição do item.
 -   **RN03:** O sistema de raridade classificará os itens como Comum,
     Incomum, Raro, Épico ou Lendário.
 -   **RN04:** O vendedor será responsável pela veracidade das
@@ -169,6 +168,9 @@ significativa de desempenho.
 -   **RN05:** O administrador poderá remover anúncios que violem as
     regras da plataforma.
 
+## 10 . Como executar:
+```npm run```
+
 ------------------------------------------------------------------------
 
-**Relikta** --- Plataforma de Acervo e Compra/Venda para Colecionadores.
+**Relikta** --- Plataforma de Acervo para Colecionadores.

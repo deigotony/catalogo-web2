@@ -1,8 +1,9 @@
 let item;
-console.log("laele");
+
 async function mostrarItens(){
-    const itens=await fetch('localhost8080:/itens'); // pega os dados dos itens via express
-    
+    const res=await fetch("/itens");
+    const itens=await res.json();
+    console.log(itens);
     for (let i=0; i<itens.length; i++){
         item=itens[i];
         item.imagem='/imagens/'+item.imagem;
@@ -49,4 +50,4 @@ function criarCard(){
         
     return card;
 }
-await mostrarItens();
+mostrarItens();
