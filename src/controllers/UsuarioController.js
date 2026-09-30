@@ -1,4 +1,5 @@
 const usuarioService = require('../services/UsuarioService');
+const { sessoes } = require('../middlewares/authMiddleware');
 class UsuarioController {
     async cadastrar(req, res){
         try{
@@ -52,26 +53,34 @@ class UsuarioController {
             const {email, senha} = req.body;
             const usuario = await usuarioService.autenticar({email, senha});
 
-            req.session.regenerate((err) => {
-                if(err){
-                    return res.status(500).json({erro: 'erro ao iniciar sessão'});
-                }
-                req.session.user = usuario;
-                return res.status(200).json({sucesso: 'login realizado com sucesso', usuario});
-            });
+            const sessionId = Math.random().toString(36).substring(2) + Date.now();
+
+            sessoes[sessionId] = usuario;
+
+            res.setHeader('Set-Cookie', `sessionId=${sessionId}; Path=/; HttpOnly`);
+            return res.status(200).json({sucesso: 'login realizado com sucesso', usuario});
         }catch(error){
             return res.status(400).json({erro: error.message});
         }
     }
 
     async logout(req, res){
-        req.session.destroy((err) => {
-            if(err){
-                return res.status(500).json({erro: 'erro ao encerrar sessão'});
+        try{
+            const cookieHeader = req.headers.cookie;
+            let cookieSession;
+
+            if(cookieHeader){
+                cookieSession = cookieHeader.split('; ').find(row => row.startsWith('sessionId='));
             }
-            res.clearCookie('connect.sid');
+            if(cookieSession){
+                const sessionId = cookieSession.split('=')[1];
+                delete sessoes[sessionId]
+            }
+            res.setHeader('Set-Cookie', 'sessionId=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT');
             return res.status(200).json({sucesso: 'sessão encerrada com sucesso'});
-        });
+        }catch(error){
+            return res.status(500).json({erro: 'erro ao encerrar sessão'});
+        }
     }
 
     async me(req, res) {
