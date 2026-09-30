@@ -1,7 +1,7 @@
 const {Usuario}=require("../models/");
 class UsuarioRepository{
-    listarTodos(condicoes={}, t=undefined){
-        return Usuario.findAll({where: condicoes, transaction: t});
+    listarTodos(condicoes){
+        return Usuario.findAll({where: condicoes});
     }
     criar(dados, t=undefined){
         return Usuario.create(dados, {transaction: t});
@@ -16,4 +16,4 @@ class UsuarioRepository{
         return Usuario.destroy({where: {usuarioId: id}, transaction: t});
     }
 }
-module.exports=UsuarioRepository;
+module.exports=new UsuarioRepository();

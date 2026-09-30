@@ -16,4 +16,4 @@ class ItemRepository{
         return Item.destroy({where: {itemId: id}, transaction: t});
     }
 }
-module.exports=ItemRepository;
+module.exports=new ItemRepository();

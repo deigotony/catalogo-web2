@@ -10,9 +10,13 @@ testes:
 testes com transações (para dar rollback)
 testar cada camada descrita anteriormente, começando do mais baixo até o mais em cima
 configurar o package.json para rodar a suite de testes
+(por ora estamos usando códigos HTTP de erro genéricos (400))
 
 mudanças:
 tirar as rotas de server.js e jogar para as camadas de routes e services
 substituir dados JSON por banco de dados (SQLite3 + Sequelize) e fazer as devidas adaptações no resto do código
 
 *: (deletei o diretório js/ contendo arquivo script.js)
+
+pra funcionar precisa de:
+node, express, sqlite, jest, supertest, sequelize, cls-hooked

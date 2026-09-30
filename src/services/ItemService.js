@@ -1,13 +1,15 @@
 const ItemRepository = require('../repositories/ItemRepository');
-const itemRepository = new ItemRepository();
 
 class ItemService{
+    constructor(repositorio=itemRepository){
+        this.repository=repositorio;
+    }
     async cadastrarItem({usuarioId, categoriaId, nome, descricao, urlImagem, data}){
         if(!nome || !urlImagem || !data || !usuarioId){
             throw new Error('nome, url da imagem, data e usuario sao obrigatórios');
         }
 
-        return await itemRepository.criar({
+        return await this.repository.criar({
             usuarioId,
             categoriaId: categoriaId || null,
             nome,
@@ -18,11 +20,11 @@ class ItemService{
     }
 
     async listarItens(condicoes = {}){
-        return await itemRepository.listarTodos(condicoes);
+        return await this.repository.listarTodos(condicoes);
     }
 
     async buscarPorId(id){
-        const item = await itemRepository.buscarPorId(id);
+        const item = await this.repository.buscarPorId(id);
         if(!item){
             throw new Error('item nao encontrado');
         }
@@ -30,7 +32,7 @@ class ItemService{
     }
 
     async atualizarItem(itemId, usuarioId, dados) {
-        const item = await itemRepository.buscarPorId(itemId);
+        const item = await this.repository.buscarPorId(itemId);
         if(!item){
             throw new Error('item nao encontrado');
         }
@@ -40,11 +42,11 @@ class ItemService{
         }
 
         await itemRepository.atualizar(itemId, dados);
-        return await itemRepository.buscarPorId(itemId);
+        return await this.repository.buscarPorId(itemId);
     }
 
     async excluirItem(itemId, usuarioId) {
-        const item = await itemRepository.buscarPorId(itemId);
+        const item = await this.repository.buscarPorId(itemId);
         if(!item){
             throw new Error('item nao encontrado');
         }
@@ -53,8 +55,8 @@ class ItemService{
             throw new Error('acesso negado, voce nao tem permissao pra alterar esse item');
         }
 
-        return await itemRepository.excluir(itemId);
+        return await this.repository.excluir(itemId);
     }
 }
 
-module.exports = new ItemService();
+module.exports = new ItemService(ItemRepository);

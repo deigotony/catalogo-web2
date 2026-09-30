@@ -1,9 +1,11 @@
 const CategoriaRepository = require('../repositories/CategoriaRepository');
-const categoriaRepository = new CategoriaRepository();
 
 class CategoriaService {
+    constructor(repositorio=categoriaRepository){
+        this.repository=repositorio;
+    }
     async listarTodas() {
-        return await categoriaRepository.listarTodos();
+        return await this.repository.listarTodos();
     }
 
     async criarCategoria(nome) {
@@ -11,13 +13,13 @@ class CategoriaService {
             throw new Error('nome da categoria obrigatorio');
         }
 
-        const categoriasExistentes = await categoriaRepository.listarTodos({nome});
+        const categoriasExistentes = await this.repository.listarTodos({nome});
         if(categoriasExistentes.length > 0){
             throw new Error('categoria ja existe');
         }
 
-        return await categoriaRepository.criar({nome});
+        return await this.repository.criar({nome});
     }
 }
 
-module.exports = new CategoriaService();
+module.exports = new CategoriaService(CategoriaRepository);

@@ -17,4 +17,4 @@ class CategoriaRepository{
         return Categoria.destroy({where: {categoriaId: id}, transaction: t});
     }
 }
-module.exports=CategoriaRepository;
+module.exports=new CategoriaRepository();
