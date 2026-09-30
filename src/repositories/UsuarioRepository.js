@@ -9,8 +9,8 @@ class UsuarioRepository{
     buscarPorId(id, t=undefined){
         return Usuario.findByPk(id, {transaction: t});
     }
-    atualizar(id, dados, t=undefined){
-        return Usuario.update(dados, {where: {usuarioId: id}, transaction: t});
+    atualizar(id, dados){
+        return Usuario.update(dados, {where: {usuarioId: id}});
     }
     excluir(id, t=undefined){
         return Usuario.destroy({where: {usuarioId: id}, transaction: t});

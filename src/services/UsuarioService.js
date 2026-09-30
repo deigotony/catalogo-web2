@@ -12,7 +12,7 @@ class UsuarioService {
 
         const usuariosExistentes = await this.repository.listarTodos({email: email});
         if(usuariosExistentes.length > 0){
-            throw new Error('email já cadastrado no sistema')
+            throw ({erro:'email já cadastrado no sistema'});
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -60,24 +60,32 @@ class UsuarioService {
     async buscarPorId(id){
         const usuario = await this.repository.buscarPorId(id);
         if(!usuario){
-            throw new Error('usuario nao encontrado');
+            throw ({erro: 'usuario nao encontrado'});
         }
         return {
             usuarioId: usuario.usuarioId,
             nome: usuario.nome,
-            email: usuario.email
+            email: usuario.email,
+            senha: usuario.senha
         };
     }
 
-    async listarTodos(t=undefined){
+    async listarTodos(){
         return await this.repository.listarTodos();
     }
-    /*
-    atualizar(id, dados, t=undefined){
-        return Usuario.update(dados, {where: {usuarioId: id}, transaction: t});
+    async atualizar(id, dados){
+        const usuario= await this.repository.atualizar(id, dados);
+        if (!usuario) throw ({erro: "id inválido"});
+        return usuario;
     }
+    async excluir(id){
+        const usuario=await this.repository.excluir(id);
+        if (!usuario) throw ({erro: "id inválido"});
+        return usuario;
+    }
+    /*
     excluir(id, t=undefined){
-        return Usuario.destroy({where: {usuarioId: id}, transaction: t});
+        return Usuario.destroy({where: {usuarioId: id}, transaction: t);
     }*/
 
 }

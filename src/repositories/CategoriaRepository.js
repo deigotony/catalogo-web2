@@ -7,8 +7,8 @@ class CategoriaRepository{
     criar(dados, t=undefined){
         return Categoria.create(dados, {transaction: t});
     }
-    buscarPorId(id, t=undefined){
-        return Categoria.findByPk(id, {transaction: t});
+    buscarPorId(id){
+        return Categoria.findByPk(id);
     }
     atualizar(id, dados, t=undefined){
         return Categoria.update(dados, {where: {categoriaId: id}, transaction: t});

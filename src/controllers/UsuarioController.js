@@ -6,7 +6,7 @@ class UsuarioController {
             const novoUsuario = await usuarioService.cadastrarUsuario({nome, email, senha});
             return res.status(201).json({sucesso: 'usuario cadastrado com sucesso', usuario: novoUsuario});
         }catch(error){
-            return res.status(400).json({erro: error.message});
+            return res.status(400).json(error);
         }
     }
 
@@ -15,7 +15,7 @@ class UsuarioController {
             const lista= await usuarioService.listarTodos();
             return res.status(200).json(lista);
         } catch (error){
-            return res.status(400).json({erro: error.message});
+            return res.status(400).json(error);
         }
     }
 
@@ -23,13 +23,30 @@ class UsuarioController {
         try{
             const {id}=req.params;
             const usuario=await usuarioService.buscarPorId(id);
-            if (!usuario) return res.status(404).json({erro: "usuário não encontrado"});
             return res.status(200).json(usuario);
         } catch (error){
-            return res.status(400).json({erro: error.message});
+            return res.status(404).json(error);
         }
     }
-
+    
+    async alterar(req, res){
+        try{
+            const {id}=req.params;
+            const usuario= await usuarioService.atualizar(id, req.body);
+            return res.status(201).json({sucesso: "usuário atualizado com sucesso", usuario});
+        } catch (error){
+            return res.status(400).json(error);
+        }
+    }
+    async excluir(req, res){
+        try{
+            const {id}=req.params;
+            const usuario=await usuarioService.excluir(id);
+            return res.status(201).json({sucesso: "usuário removido com sucesso", usuario});
+        } catch(error){
+            return res.status(404).json(error);
+        }
+    }
     async login(req, res){
         try{
             const {email, senha} = req.body;

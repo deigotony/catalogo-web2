@@ -19,17 +19,28 @@ class ItemController {
         }
     }
 
+    async buscarImagem(req, res){
+        try{
+            const {url}=req.params;
+            const imagem=await itemService.buscarImagem(url);
+            return res.status(200).json(imagem);
+        }catch(error){
+            return res.status(400).json(error);
+        }
+    }
+
     async cadastrar(req, res){
         try{
-            if(!req.session || !req.session.user){
+            /*if(!req.session || !req.session.user){
                 return res.status(401).json({erro: 'você precisa estar logado para cadastrar um item'});
-            }
+            }*/
 
-            const {categoriaId, nome, descricao, data} = req.body;
+            const {categoriaId, nome, descricao, data, usuarioId} = req.body;
             const urlImagem = req.file ? `/imagens/${req.file.filename}` :req.body.urlImagem;
 
             const novoItem = await itemService.cadastrarItem({
-                usuarioId: req.session.user.usuarioId,
+                //usuarioId: req.session.user.usuarioId,
+                usuarioId,
                 categoriaId,
                 nome,
                 descricao,
@@ -45,13 +56,13 @@ class ItemController {
 
     async atualizar(req, res){
         try{
-            if(!req.session || !req.session.user){
+            /*if(!req.session || !req.session.user){
                 return res.status(401).json({erro: 'você precisa estar logado para alterar um item.'});
-            }
+            }*/
 
             const{id} = req.params;
-            const usuarioId = req.session.user.usuarioId;
-            const itemAtualizado = await itemService.atualizarItem(id, usuarioId, req.body);
+            //const usuarioId = req.session.user.usuarioId;
+            const itemAtualizado = await itemService.atualizarItem(id, req.body);
 
             return res.status(200).json({sucesso: 'Item atualizado com sucesso.', item: itemAtualizado});
         }catch(error){
@@ -61,13 +72,13 @@ class ItemController {
 
     async excluir(req, res){
         try{
-            if(!req.session || !req.session.user){
+            /*if(!req.session || !req.session.user){
                 return res.status(401).json({erro: 'você precisa estar logado para remover um item'});
-            }
+            }*/
 
             const {id} = req.params;
-            const usuarioId = req.session.user.usuarioId;
-            await itemService.excluirItem(id, usuarioId);
+            //const usuarioId = req.session.user.usuarioId;
+            await itemService.excluirItem(id);
 
             return res.status(200).json({sucesso: 'item removido com sucesso'});
         }catch(error){

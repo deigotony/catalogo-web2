@@ -1,10 +1,11 @@
 let item;
+console.log("laele");
 async function mostrarItens(){
-    const resposta=await fetch('/dados/itens'); // pega o json dos itens pelo express
-    const itens=await resposta.json();
+    const itens=await fetch('localhost8080:/itens'); // pega os dados dos itens via express
+    
     for (let i=0; i<itens.length; i++){
         item=itens[i];
-        item.imagem='imagens/'+item.imagem;
+        item.imagem='/imagens/'+item.imagem;
         const novoItem=criarCard();
         novoItem.id=item.id;
         document.getElementById("catalogo").appendChild(novoItem);
@@ -48,4 +49,4 @@ function criarCard(){
         
     return card;
 }
-mostrarItens();
+await mostrarItens();

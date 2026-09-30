@@ -38,9 +38,9 @@ describe("Testes de usuários", ()=>{
                 senha: c
             });
             expect(resposta.status).toBe(201);
-            expect(resposta.usuario.nome).toBe(a);
-            expect(resposta.usuario.email).toBe(b);
-            expect(resposta.usuario.senha).toBe(c);
+            expect(resposta.body.usuario.nome).toBe(a);
+            expect(resposta.body.usuario.email).toBe(b);
+            expect(resposta.body.usuario.senha).toBe(c);
         })
     })
     describe("Erros de criação de usuário", ()=>{

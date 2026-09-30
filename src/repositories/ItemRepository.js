@@ -3,11 +3,14 @@ class ItemRepository{
     listarTodos(condicoes={}, t=undefined){
         return Item.findAll({include: Usuario, where: condicoes, transaction: t});
     }
-    criar(dados, t=undefined){
-        return Item.create(dados, {transaction: t});
+    criar(dados){
+        return Item.create(dados);
     }
     buscarPorId(id, t=undefined){
         return Item.findByPk(id, {transaction: t});
+    }
+    buscarImagem(url){
+        return 
     }
     atualizar(id, dados, t=undefined){
         return Item.update(dados, {where: {itemId: id}, transaction: t});
