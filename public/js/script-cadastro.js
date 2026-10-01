@@ -1,26 +1,38 @@
-async function cadastrarItem(event){
+async function cadastrarItem(event) {
     event.preventDefault();
-    var imagem=document.getElementById("imageUpload");
-    var nome=document.getElementById("nome");
-    var data=document.getElementById("data");
-    var descricao=document.getElementById("descricao");
-    if (!imagem || !nome || !data || !descricao) return;
-    try{
-        const resposta=await fetch('/itens', {
-            method: "POST",
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                nome: nome.value,
-                imagem: imagem.files[0].name,
-                data: data.value,
-                descricao: descricao.value
-            })
-        })
-        const formData = new FormData();
-        formData.append('foto', imagem.files[0]);
-        const resp2 = await fetch('/imagens', {
-            method: "POST",
+
+    const nome = document.getElementById('nome').value;
+    const data = document.getElementById('data').value;
+    const descricao = document.getElementById('descricao').value;
+    const categoriaId = document.getElementById('categoriaId').value;
+    const imageInput = document.getElementById('imageUpload');
+
+    const formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('data', document.getElementById('data').value);
+    formData.append('descricao', descricao);
+    formData.append('categoriaId', categoriaId);
+
+    if (imageInput.files[0]) {
+        formData.append('imagem', imageInput.files[0]);
+    }
+
+    try {
+        const response = await fetch('/itens', {
+            method: 'POST',
             body: formData
-        })
-    } catch(err){ return err;}
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('item cadastrado com sucesso');
+            window.location.href = './catalogo.html';
+        } else if (response.status === 401) {
+            alert('sessão expirada ou não autorizada');
+            window.location.href = './login.html';
+        } else {
+            alert(result.erro || 'erro ao cadastrar item');
+        }
+    } catch (error) {console.error('Erro:', error);}
 }

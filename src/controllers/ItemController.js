@@ -29,28 +29,31 @@ class ItemController {
         }
     }
 
-    async cadastrar(req, res){
-        try{
-            /*if(!req.session || !req.session.user){
-                return res.status(401).json({erro: 'você precisa estar logado para cadastrar um item'});
-            }*/
+    async cadastrar(req, res) {
+        try {
+            const { nome, data, descricao, categoriaId } = req.body;
 
-            const {categoriaId, nome, descricao, data, usuarioId} = req.body;
-            const urlImagem = req.file ? `/imagens/${req.file.filename}` :req.body.urlImagem;
+            // 1. Pega a imagem gerada pelo Multer e ajusta o caminho para urlImagem
+            const urlImagem = req.file ? `/uploads/${req.file.filename}` : null;
 
+            // 2. Extrai o ID do usuário injetado pelo middleware estaAutenticado
+            // (Verifique se no seu modelo o id do usuário se chama 'id' ou 'usuarioId')
+            const usuarioId = req.usuario?.id || req.usuario?.usuarioId;
+
+            // 3. Chama o método cadastrarItem com as chaves exatas esperadas pelo Service
             const novoItem = await itemService.cadastrarItem({
-                //usuarioId: req.session.user.usuarioId,
                 usuarioId,
-                categoriaId,
+                categoriaId: categoriaId ? Number(categoriaId) : null,
                 nome,
                 descricao,
                 urlImagem,
                 data
             });
 
-            return res.status(201).json({sucesso: 'item cadastrado com sucesso',item: novoItem});
-        }catch(error){
-            return res.status(400).json({erro: error.message});
+            return res.status(201).json(novoItem);
+        } catch (error) {
+            console.error('Erro no cadastro do item:', error.message);
+            return res.status(400).json({ erro: error.message });
         }
     }
 

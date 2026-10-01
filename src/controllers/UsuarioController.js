@@ -50,6 +50,7 @@ class UsuarioController {
     }
     async login(req, res){
         try{
+            console.log("Dados recebidos no login:", req.body); // <-- ADICIONE ESTA LINHA
             const {email, senha} = req.body;
             const usuario = await usuarioService.autenticar({email, senha});
 
@@ -60,6 +61,7 @@ class UsuarioController {
             res.setHeader('Set-Cookie', `sessionId=${sessionId}; Path=/; HttpOnly`);
             return res.status(200).json({sucesso: 'login realizado com sucesso', usuario});
         }catch(error){
+            console.log("Erro capturado no service:", error.message); // <-- ADICIONE ESTA LINHA
             return res.status(400).json({erro: error.message});
         }
     }

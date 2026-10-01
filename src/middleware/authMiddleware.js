@@ -12,11 +12,11 @@ function estaAutenticado(req, res, next){
         sessionId = cookieDaSession.split('=')[1];
     }
 
-    if(sessionId && sessoes[sessionId]){
-        req.user = sessoes[sessionId];
-        return next();
+    if (!sessionId || !sessoes[sessionId]) {
+        return res.status(401).json({ erro: 'Sessão expirada ou não autorizada.' });
     }
-    return res.status(401).json({erro: 'nao autorizado'})
+    req.usuario = sessoes[sessionId];
+    next();
 }   
 
 module.exports = {estaAutenticado, sessoes};
